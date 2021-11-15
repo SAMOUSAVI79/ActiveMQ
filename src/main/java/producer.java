@@ -9,6 +9,8 @@ public class producer {
         thread(new HelloWorldProducer(), false);
         thread(new consumer1.HelloWorldConsumer(), false);
         thread(new consumer2.HelloWorldConsumer(), false);
+        thread(new consumer3.HelloWorldConsumer(), false);
+
 
     }
     public static void thread(Runnable runnable, boolean daemon){
@@ -39,7 +41,7 @@ public class producer {
 
                 //create multi Message
                 String text = "message" ;
-                for (int i=0; i < 2 ; i++) {
+                for (int i=0; i < 3 ; i++) {
                     String fulltext = text + i;
                     TextMessage message = session.createTextMessage(fulltext);
 
