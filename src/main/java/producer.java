@@ -7,10 +7,9 @@ import javax.jms.*;
 public class producer {
     public static void main(String[] args) {
         thread(new HelloWorldProducer(), false);
-        thread(new consumer1.HelloWorldConsumer(), false);
-        thread(new consumer2.HelloWorldConsumer(), false);
-        thread(new consumer3.HelloWorldConsumer(), false);
 
+        consumer5.HelloWorldConsumer helloWorldConsumer = new consumer5.HelloWorldConsumer();
+helloWorldConsumer.run();
 
     }
     public static void thread(Runnable runnable, boolean daemon){

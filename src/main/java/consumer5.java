@@ -3,16 +3,13 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import javax.jms.Session;
 import javax.jms.*;
 
-public class consumer3 {
+public class consumer5 {
     public static void main(String[] args) {
-        thread(new HelloWorldConsumer(), false);
+        //thread(new HelloWorldConsumer(), false);
+
 
     }
-    public static void thread(Runnable runnable,boolean deamon){
-        Thread brokerThread = new Thread(runnable);
-        brokerThread.setDaemon(deamon);
-        brokerThread.start();
-    }
+
     public static class HelloWorldConsumer implements Runnable,ExceptionListener{
         public void run(){
             try{
@@ -38,14 +35,20 @@ public class consumer3 {
                 Message message = consumer.receive(1000);
 
                 //action
-                if(message instanceof TextMessage){
-                    TextMessage textMessage = (TextMessage) message;
-                    String text = textMessage.getText();
-                    System.out.println("recived : " + text);
+                while (message != null) {
 
-                }else{
-                    System.out.println("recived : " + message);
+                    if(message instanceof TextMessage){
+                        TextMessage textMessage = (TextMessage) message;
+                        String text = textMessage.getText();
+                        System.out.println("recived : " + text);
+
+                    }else{
+                        System.out.println("recived : " + message);
+                    }
+                    message = consumer.receive(10000);
+
                 }
+
                 consumer.close();
                 session.close();
                 connection.close();
